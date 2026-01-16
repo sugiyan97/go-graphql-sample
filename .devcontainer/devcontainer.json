@@ -1,0 +1,44 @@
+{
+	"name": "Go GraphQL Learning Environment",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"golang.go",
+				"ms-vscode.vscode-json",
+				"graphql.vscode-graphql",
+				"graphql.vscode-graphql-syntax"
+			],
+			"settings": {
+				"go.toolsManagement.checkForUpdates": "local",
+				"go.useLanguageServer": true,
+				"go.formatTool": "goimports",
+				"go.lintTool": "golangci-lint",
+				"files.exclude": {
+					"**/.git": true,
+					"**/.DS_Store": true
+				}
+			}
+		}
+	},
+	"remoteUser": "vscode",
+	"forwardPorts": [8080],
+	"portsAttributes": {
+		"8080": {
+			"label": "GraphQL Server",
+			"onAutoForward": "notify"
+		}
+	},
+	"postCreateCommand": "if [ ! -f go.mod ]; then go mod init go-graphql-sample; fi && go mod download && GOTOOLCHAIN=auto go install github.com/99designs/gqlgen@latest",
+	"remoteEnv": {
+		"PATH": "${containerEnv:PATH}:${containerEnv:HOME}/go/bin",
+		"GOTOOLCHAIN": "auto"
+	}
+}
