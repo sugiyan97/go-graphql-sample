@@ -1,0 +1,28 @@
+# gqlgen設定ファイル
+# GraphQLスキーマからGoコードを生成するための設定
+
+# スキーマファイルの場所
+schema:
+  - internal/gql/schema.graphqls
+
+# 生成されるコードの設定
+exec:
+  filename: internal/gql/generated/generated.go
+  package: generated
+
+# モデル生成の設定
+model:
+  filename: internal/gql/generated/models_gen.go
+  package: generated
+
+# リゾルバーの設定
+resolver:
+  layout: follow-schema
+  dir: internal/resolver
+  package: resolver
+  filename_template: "{name}.go"
+
+# 生成されるファイルのパッケージ名
+models:
+  User:
+    model: go-graphql-sample/internal/model.User
