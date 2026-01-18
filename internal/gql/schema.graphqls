@@ -10,6 +10,7 @@ type User {
   name: String!    # ユーザー名（必須）
   email: String!   # メールアドレス（必須）
   createdAt: Time! # 作成日時（必須）
+  updatedAt: Time! # 更新日時（必須）
 }
 
 # クエリの定義
