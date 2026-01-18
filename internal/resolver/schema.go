@@ -8,15 +8,16 @@ import (
 	"context"
 	"fmt"
 	"go-graphql-sample/internal/gql/generated"
+	"go-graphql-sample/internal/model"
 )
 
 // CreateUser is the resolver for the createUser field.
-func (r *mutationResolver) CreateUser(ctx context.Context, input generated.CreateUserInput) (*generated.User, error) {
+func (r *mutationResolver) CreateUser(ctx context.Context, input generated.CreateUserInput) (*model.User, error) {
 	panic(fmt.Errorf("not implemented: CreateUser - createUser"))
 }
 
 // UpdateUser is the resolver for the updateUser field.
-func (r *mutationResolver) UpdateUser(ctx context.Context, id string, input generated.UpdateUserInput) (*generated.User, error) {
+func (r *mutationResolver) UpdateUser(ctx context.Context, id string, input generated.UpdateUserInput) (*model.User, error) {
 	panic(fmt.Errorf("not implemented: UpdateUser - updateUser"))
 }
 
@@ -26,12 +27,12 @@ func (r *mutationResolver) DeleteUser(ctx context.Context, id string) (bool, err
 }
 
 // Users is the resolver for the users field.
-func (r *queryResolver) Users(ctx context.Context) ([]*generated.User, error) {
+func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
 	panic(fmt.Errorf("not implemented: Users - users"))
 }
 
 // User is the resolver for the user field.
-func (r *queryResolver) User(ctx context.Context, id string) (*generated.User, error) {
+func (r *queryResolver) User(ctx context.Context, id string) (*model.User, error) {
 	panic(fmt.Errorf("not implemented: User - user"))
 }
 
