@@ -9,6 +9,8 @@ import (
 	"fmt"
 	"go-graphql-sample/internal/gql/generated"
 	"go-graphql-sample/internal/model"
+
+	"gorm.io/gorm"
 )
 
 // CreateUser is the resolver for the createUser field.
@@ -28,12 +30,29 @@ func (r *mutationResolver) DeleteUser(ctx context.Context, id string) (bool, err
 
 // Users is the resolver for the users field.
 func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
-	panic(fmt.Errorf("not implemented: Users - users"))
+	var users []*model.User
+
+	// データベースから全ユーザーを取得
+	if err := r.DB.Find(&users).Error; err != nil {
+		return nil, fmt.Errorf("failed to fetch users: %w", err)
+	}
+
+	return users, nil
 }
 
 // User is the resolver for the user field.
 func (r *queryResolver) User(ctx context.Context, id string) (*model.User, error) {
-	panic(fmt.Errorf("not implemented: User - user"))
+	var user model.User
+
+	// データベースから指定IDのユーザーを取得
+	if err := r.DB.Where("id = ?", id).First(&user).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, fmt.Errorf("user with id %s not found", id)
+		}
+		return nil, fmt.Errorf("failed to fetch user: %w", err)
+	}
+
+	return &user, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
