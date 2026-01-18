@@ -24,5 +24,6 @@ resolver:
 
 # 生成されるファイルのパッケージ名
 models:
-  User:
-    model: go-graphql-sample/internal/model.User
+  # UserモデルはStep 3で作成されるため、ここではコメントアウト
+  # User:
+  #   model: go-graphql-sample/internal/model.User
